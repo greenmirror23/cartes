@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50% { transform: translateY(-18px) rotate(-3deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #9a7a2e 0%,
+    #f0d060 25%,
+    #c9a844 50%,
+    #f0d060 75%,
+    #9a7a2e 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 5s linear infinite;
+}
+
+.card-float {
+  animation: float-y 4s ease-in-out infinite;
+}
+
+.card-float-2 {
+  animation: float-y 4s ease-in-out infinite;
+  animation-delay: -1.3s;
+}
+
+.card-float-3 {
+  animation: float-y 4s ease-in-out infinite;
+  animation-delay: -2.6s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 639px) {
+  .phone-scale-mobile { zoom: 0.60; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .phone-scale-mobile { zoom: 0.78; }
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #08080f;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a844;
+  border-radius: 2px;
+}
