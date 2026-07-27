@@ -20,6 +20,7 @@ const PACKS = [
       "Livraison sous 48h",
     ],
     cta: "Commander le Pack Small",
+    href: "https://buy.stripe.com/7sY00i9wrdM65KGcai7g400",
     highlight: false,
   },
   {
@@ -41,6 +42,7 @@ const PACKS = [
       "Renouvellement facilité",
     ],
     cta: "Commander le Pack Medium",
+    href: "#contact",
     highlight: true,
   },
   {
@@ -62,6 +64,7 @@ const PACKS = [
       "Renouvellement prioritaire",
     ],
     cta: "Commander le Pack Large",
+    href: "#contact",
     highlight: false,
   },
 ]
@@ -282,7 +285,7 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
 
       {/* CTA */}
       <a
-        href="#contact"
+        href={pack.href}
         className="block w-full text-center py-4 rounded-2xl text-sm font-semibold tracking-wide transition-all duration-300"
         style={
           isHighlight
