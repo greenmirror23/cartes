@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 const PACKS = [
   {
-    name: "Pack 200",
+    name: "Small",
     tagline: "Idéal pour démarrer",
     quantity: "200",
     unit: "cartes numériques",
@@ -19,32 +19,32 @@ const PACKS = [
       "Support par email",
       "Livraison sous 48h",
     ],
-    cta: "Commander le Pack 200",
+    cta: "Commander le Pack Small",
     highlight: false,
   },
   {
-    name: "Pack 500",
+    name: "Medium",
     tagline: "Le plus populaire",
     quantity: "500",
     unit: "cartes numériques",
     price: "95",
-    badge: "Meilleure valeur",
+    badge: null,
     features: [
       "500 cartes numériques personnalisées",
       "Compatible Apple Wallet & Google Wallet",
       "QR code intégré et scannable",
-      "Design premium aux couleurs de votre marque",
+      "Design aux couleurs de votre marque",
       "Tableau de bord avancé + analytics",
       "Notifications push automatiques",
       "Support prioritaire (réponse < 4h)",
       "Livraison sous 48h",
       "Renouvellement facilité",
     ],
-    cta: "Commander le Pack 500",
+    cta: "Commander le Pack Medium",
     highlight: true,
   },
   {
-    name: "Pack 1000",
+    name: "Large",
     tagline: "Pour les grands volumes",
     quantity: "1000",
     unit: "cartes numériques",
@@ -61,7 +61,7 @@ const PACKS = [
       "Livraison sous 48h",
       "Renouvellement prioritaire",
     ],
-    cta: "Commander le Pack 1000",
+    cta: "Commander le Pack Large",
     highlight: false,
   },
 ]
@@ -119,7 +119,7 @@ export default function ProductsSection() {
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             Des cartes de fidélité numériques premium, personnalisées à votre
-            image. Paiement unique, cartes à vie.
+            image. Facturation mensuelle.
           </p>
         </motion.div>
 
@@ -247,7 +247,7 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
             className="text-[#F8F6F0]/35 text-xs ml-1"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            paiement unique
+            par mois
           </span>
         </div>
       </div>
