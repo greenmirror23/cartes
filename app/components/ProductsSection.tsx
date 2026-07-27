@@ -42,7 +42,7 @@ const PACKS = [
       "Renouvellement facilité",
     ],
     cta: "Commander le Pack Medium",
-    href: "#contact",
+    href: "https://buy.stripe.com/28EfZg4c7cI27SOeiq7g402",
     highlight: true,
   },
   {
@@ -64,7 +64,7 @@ const PACKS = [
       "Renouvellement prioritaire",
     ],
     cta: "Commander le Pack Large",
-    href: "#contact",
+    href: "https://buy.stripe.com/14A00i8sn0Zkc942zI7g403",
     highlight: false,
   },
 ]
