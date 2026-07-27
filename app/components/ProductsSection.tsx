@@ -8,7 +8,7 @@ const PACKS = [
     tagline: "Idéal pour démarrer",
     quantity: "200",
     unit: "cartes numériques",
-    price: "149",
+    price: "50",
     badge: null,
     features: [
       "200 cartes numériques personnalisées",
@@ -27,7 +27,7 @@ const PACKS = [
     tagline: "Le plus populaire",
     quantity: "500",
     unit: "cartes numériques",
-    price: "299",
+    price: "95",
     badge: "Meilleure valeur",
     features: [
       "500 cartes numériques personnalisées",
@@ -42,6 +42,27 @@ const PACKS = [
     ],
     cta: "Commander le Pack 500",
     highlight: true,
+  },
+  {
+    name: "Pack 1000",
+    tagline: "Pour les grands volumes",
+    quantity: "1000",
+    unit: "cartes numériques",
+    price: "160",
+    badge: null,
+    features: [
+      "1000 cartes numériques personnalisées",
+      "Compatible Apple Wallet & Google Wallet",
+      "QR code intégré et scannable",
+      "Design premium sur mesure",
+      "Tableau de bord avancé + analytics",
+      "Notifications push illimitées",
+      "Support dédié (réponse < 2h)",
+      "Livraison sous 48h",
+      "Renouvellement prioritaire",
+    ],
+    cta: "Commander le Pack 1000",
+    highlight: false,
   },
 ]
 
@@ -103,7 +124,7 @@ export default function ProductsSection() {
         </motion.div>
 
         {/* Cards grid */}
-        <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {PACKS.map((pack, i) => (
             <motion.div
               key={pack.name}
