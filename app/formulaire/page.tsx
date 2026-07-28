@@ -3,6 +3,8 @@
 import { useRef, useState } from "react"
 import Image from "next/image"
 
+const WEBHOOK_URL = "https://n8n.srv823169.hstgr.cloud/webhook/creer-carte"
+
 const TYPES_COMMERCE = ["Salon", "Restaurant", "Magasin", "Autre"]
 const TYPES_CARTE = ["Carte à points", "Carte à réduction", "Autre"]
 
@@ -81,16 +83,14 @@ export default function FormulairePage() {
     if (logo && !sansLogo) donnees.append("logo", logo, logo.name)
 
     try {
-      const reponse = await fetch("/api/creer-carte", {
+      const reponse = await fetch(WEBHOOK_URL, {
         method: "POST",
         body: donnees,
       })
-      const resultat = await reponse.json().catch(() => null)
 
-      if (!reponse.ok || !resultat?.ok) {
+      if (!reponse.ok) {
         setErreur(
-          resultat?.message ??
-            "L'envoi a échoué. Vérifiez votre connexion et réessayez."
+          `L'envoi a échoué (erreur ${reponse.status}). Réessayez dans un instant.`
         )
         setEtat("erreur")
         return
