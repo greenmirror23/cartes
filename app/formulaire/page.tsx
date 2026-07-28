@@ -32,6 +32,7 @@ export default function FormulairePage() {
   const [sansLogo, setSansLogo] = useState(false)
   const [siteWeb, setSiteWeb] = useState("")
   const [email, setEmail] = useState("")
+  const [telephone, setTelephone] = useState("")
   const [couleurFond, setCouleurFond] = useState<string | null>(null)
 
   const [etat, setEtat] = useState<"repos" | "envoi" | "succes" | "erreur">(
@@ -78,6 +79,7 @@ export default function FormulairePage() {
     donnees.append("type_carte", typeCarte)
     donnees.append("site_web", normaliserSite(siteWeb))
     donnees.append("email", email.trim())
+    donnees.append("telephone", telephone.trim())
     donnees.append("couleur_fond", couleurFond ?? "")
     donnees.append("sans_logo", sansLogo ? "oui" : "non")
     if (logo && !sansLogo) donnees.append("logo", logo, logo.name)
@@ -196,16 +198,18 @@ export default function FormulairePage() {
                 />
               </Champ>
 
-              <Champ label="Type de commerce">
+              <Champ label="Type de commerce" obligatoire>
                 <Liste
+                  requis
                   valeur={typeCommerce}
                   onChange={setTypeCommerce}
                   options={TYPES_COMMERCE}
                 />
               </Champ>
 
-              <Champ label="Type de carte souhaitée">
+              <Champ label="Type de carte souhaitée" obligatoire>
                 <Liste
+                  requis
                   valeur={typeCarte}
                   onChange={setTypeCarte}
                   options={TYPES_CARTE}
@@ -332,6 +336,26 @@ export default function FormulairePage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="contact@moncommerce.fr"
+                  className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
+                  style={styleChamp}
+                  onFocus={(e) =>
+                    (e.currentTarget.style.borderColor = "rgba(201,168,68,0.6)")
+                  }
+                  onBlur={(e) =>
+                    (e.currentTarget.style.borderColor =
+                      "rgba(248,246,240,0.12)")
+                  }
+                />
+              </Champ>
+
+              <Champ label="Téléphone">
+                <input
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  value={telephone}
+                  onChange={(e) => setTelephone(e.target.value)}
+                  placeholder="06 12 34 56 78"
                   className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
                   style={styleChamp}
                   onFocus={(e) =>
@@ -508,14 +532,17 @@ function Liste({
   valeur,
   onChange,
   options,
+  requis = false,
 }: {
   valeur: string
   onChange: (v: string) => void
   options: string[]
+  requis?: boolean
 }) {
   return (
     <div className="relative">
       <select
+        required={requis}
         value={valeur}
         onChange={(e) => onChange(e.target.value)}
         className="w-full rounded-xl px-4 py-3 text-sm outline-none appearance-none cursor-pointer transition-colors duration-200"
