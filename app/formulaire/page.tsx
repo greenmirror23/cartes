@@ -124,22 +124,24 @@ export default function FormulairePage() {
 
       <div className="max-w-2xl mx-auto px-6 py-16 sm:py-20">
         {/* En-tête */}
-        <a href="/" className="inline-flex items-center gap-3 mb-12">
-          <Image
-            src="/greenmirror-emblem.png"
-            alt="GreenMirror"
-            width={40}
-            height={51}
-            priority
-            className="h-10 w-auto drop-shadow-[0_2px_8px_rgba(201,168,68,0.25)]"
-          />
-          <span
-            className="text-white text-[16px] font-semibold tracking-wide"
-            style={{ fontFamily: "var(--font-playfair)" }}
-          >
-            GreenMirror
-          </span>
-        </a>
+        <div className="mb-12">
+          <a href="/" className="inline-flex items-center gap-3">
+            <Image
+              src="/greenmirror-emblem.png"
+              alt="GreenMirror"
+              width={40}
+              height={51}
+              priority
+              className="h-10 w-auto drop-shadow-[0_2px_8px_rgba(201,168,68,0.25)]"
+            />
+            <span
+              className="text-white text-[16px] font-semibold tracking-wide"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              GreenMirror
+            </span>
+          </a>
+        </div>
 
         {etat === "succes" ? (
           <Succes />
