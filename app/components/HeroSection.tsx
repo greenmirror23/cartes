@@ -8,6 +8,7 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion"
+import { BarberPass, PizzaPass, GreenMirrorPass } from "./WalletPass"
 
 const STEPS = [
   { step: "Étape 1", text: "Vos clients reçoivent un lien par SMS." },
@@ -25,18 +26,18 @@ export default function HeroSection() {
   })
 
   /*
-   * Apple Wallet tight stack: each card flies in from below and settles into
-   * an overlapping stack. Only a ~44px header peek of the cards behind shows;
-   * the GreenMirror card lands at the bottom, fully visible, in front.
-   * Peek offset = 44px → bank top (y=0), barber (y=44), GreenMirror (y=88, full).
+   * Pile façon Apple Wallet : chaque carte arrive du bas et se range dans la pile.
+   * Seul l'en-tête (~40 px) des cartes de derrière reste visible, exactement comme
+   * dans le vrai Wallet ; le pass GreenMirror arrive en dernier, entièrement visible.
+   * Décalage = 40 px → banque (y=0), barber (y=40), pizzeria (y=80), GreenMirror (y=120).
    */
-  const PEEK = 44
-  const ENTER = 470 // start fully below the clip zone (cards never fade, only slide)
+  const PEEK = 40
+  const ENTER = 470 // départ sous la zone visible (les cartes glissent, sans fondu)
 
-  const bankY    = useTransform(scrollYProgress, [0,    0.12], [ENTER, 0])
-  const cafeY    = useTransform(scrollYProgress, [0.18, 0.34], [ENTER, PEEK])
-  const loyaltyY = useTransform(scrollYProgress, [0.40, 0.56], [ENTER, PEEK * 2])
-  const gmY      = useTransform(scrollYProgress, [0.62, 0.78], [ENTER, PEEK * 3])
+  const bankY   = useTransform(scrollYProgress, [0,    0.12], [ENTER, 0])
+  const barberY = useTransform(scrollYProgress, [0.18, 0.34], [ENTER, PEEK])
+  const pizzaY  = useTransform(scrollYProgress, [0.40, 0.56], [ENTER, PEEK * 2])
+  const gmY     = useTransform(scrollYProgress, [0.62, 0.78], [ENTER, PEEK * 3])
 
   const [activeStep, setActiveStep] = useState(0)
   useMotionValueEvent(scrollYProgress, "change", (v) => {
@@ -273,16 +274,14 @@ export default function HeroSection() {
                         <motion.div className="absolute inset-x-0" style={{ y: bankY, zIndex: 1 }}>
                           <BankCard />
                         </motion.div>
-                        <motion.div className="absolute inset-x-0" style={{ y: cafeY, zIndex: 2 }}>
-                          <CafeCard />
+                        <motion.div className="absolute inset-x-0 mx-0.5" style={{ y: barberY, zIndex: 2 }}>
+                          <BarberPass />
                         </motion.div>
-                        <motion.div className="absolute inset-x-0" style={{ y: loyaltyY, zIndex: 3 }}>
-                          <LoyaltyCard />
+                        <motion.div className="absolute inset-x-0 mx-0.5" style={{ y: pizzaY, zIndex: 3 }}>
+                          <PizzaPass />
                         </motion.div>
-                        <motion.div className="absolute inset-x-0" style={{ y: gmY, zIndex: 4 }}>
-                          <div className="mx-0.5">
-                            <GreenMirrorCard small />
-                          </div>
+                        <motion.div className="absolute inset-x-0 mx-0.5" style={{ y: gmY, zIndex: 4 }}>
+                          <GreenMirrorPass />
                         </motion.div>
                       </div>
 
@@ -386,70 +385,6 @@ function BankCard() {
   )
 }
 
-function CafeCard() {
-  return (
-    <div
-      className="h-[138px] rounded-2xl overflow-hidden mx-0.5 relative"
-      style={{
-        background: "linear-gradient(135deg, #064e3b 0%, #047857 55%, #10b981 100%)",
-        boxShadow: "0 6px 28px rgba(0,0,0,0.55)",
-      }}
-    >
-      <div className="absolute inset-0 opacity-20" style={{
-        background: "linear-gradient(155deg, rgba(255,255,255,0.4) 0%, transparent 45%)",
-      }} />
-      <div className="absolute -bottom-2 -right-2 w-24 h-24 rounded-full blur-2xl opacity-20" style={{
-        background: "radial-gradient(circle, #6ee7b7 0%, transparent 70%)",
-      }} />
-
-      <div className="relative p-4 h-full flex flex-col justify-between">
-        <div className="flex justify-between items-start">
-          <div>
-            <div className="text-white/55 text-[7px] tracking-[0.2em] uppercase" style={{ fontFamily: "var(--font-inter)" }}>Carte fidélité</div>
-            <div className="text-white text-[18px] font-bold tracking-tight mt-0.5" style={{ fontFamily: "var(--font-playfair)" }}>Le Rostand</div>
-          </div>
-          <div className="bg-white/20 rounded-full px-2.5 py-1">
-            <span className="text-white text-[7.5px] font-semibold tracking-widest" style={{ fontFamily: "var(--font-inter)" }}>GOLD</span>
-          </div>
-        </div>
-        <div>
-          <div className="flex gap-[4px] mb-2">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 h-[18px] rounded-[4px] flex items-center justify-center"
-                style={{ background: i < 6 ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.15)" }}
-              >
-                {i < 6 && (
-                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C8.5 2 6 5 6 8c0 4 6 13 6 13s6-9 6-13c0-3-2.5-6-6-6z" fill="#064e3b"/>
-                    <circle cx="12" cy="8" r="2.5" fill="#10b981"/>
-                  </svg>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between items-end">
-            <span className="text-white text-[11.5px] font-semibold" style={{ fontFamily: "var(--font-inter)" }}>6 / 8 cafés</span>
-            <span className="text-white/60 text-[8px]" style={{ fontFamily: "var(--font-inter)" }}>Café offert au prochain</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ScissorsIcon({ size = 9, color = "#0a0a0a" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <circle cx="6" cy="6" r="3" stroke={color} strokeWidth="2" />
-      <circle cx="6" cy="18" r="3" stroke={color} strokeWidth="2" />
-      <line x1="20" y1="4" x2="8.5" y2="15.5" stroke={color} strokeWidth="2" strokeLinecap="round" />
-      <line x1="20" y1="20" x2="8.5" y2="8.5" stroke={color} strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  )
-}
-
 // Glossy piano-black surface shared by the premium cards
 const GLOSSY_BLACK_BG =
   "linear-gradient(135deg, #26262b 0%, #101013 30%, #060607 52%, #0c0c0f 70%, #1c1c21 100%)"
@@ -497,52 +432,6 @@ const goldEmboss: React.CSSProperties = {
   backgroundClip: "text",
   WebkitTextFillColor: "transparent",
   filter: "drop-shadow(0 1px 0.5px rgba(0,0,0,0.85))",
-}
-
-function LoyaltyCard() {
-  return (
-    <div
-      className="h-[138px] rounded-2xl overflow-hidden mx-0.5 relative"
-      style={{
-        background: "linear-gradient(135deg, #991b1b 0%, #dc2626 50%, #ea580c 100%)",
-        boxShadow: "0 6px 28px rgba(0,0,0,0.55)",
-      }}
-    >
-      <div className="absolute inset-0 opacity-22" style={{
-        background: "linear-gradient(155deg, rgba(255,255,255,0.4) 0%, transparent 40%)",
-      }} />
-      <div className="absolute right-3 bottom-1 text-white/[0.07] font-bold leading-none select-none" style={{ fontSize: 72, fontFamily: "var(--font-playfair)" }}>
-        212
-      </div>
-
-      <div className="relative p-4 h-full flex flex-col justify-between">
-        <div className="flex justify-between items-start">
-          <div>
-            <div className="text-white/55 text-[7px] tracking-[0.2em] uppercase" style={{ fontFamily: "var(--font-inter)" }}>Carte fidélité</div>
-            <div className="text-white text-[17px] font-bold tracking-tight mt-0.5" style={{ fontFamily: "var(--font-playfair)" }}>Le 212 Barber</div>
-          </div>
-          <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
-            <ScissorsIcon size={14} color="rgba(255,255,255,0.9)" />
-          </div>
-        </div>
-        <div>
-          <div className="flex gap-[4.5px] mb-2">
-            {[...Array(10)].map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 h-[5px] rounded-full"
-                style={{ background: i < 4 ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.18)" }}
-              />
-            ))}
-          </div>
-          <div className="flex justify-between items-end">
-            <span className="text-white text-[11.5px] font-semibold" style={{ fontFamily: "var(--font-inter)" }}>4 / 10 coupes</span>
-            <span className="text-white/60 text-[8px]" style={{ fontFamily: "var(--font-inter)" }}>Coupe offerte à la 10ᵉ</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
 }
 
 function MiniQR({
