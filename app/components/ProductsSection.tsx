@@ -78,25 +78,8 @@ export default function ProductsSection() {
       id="products"
       ref={ref}
       className="relative py-32 overflow-hidden"
+      style={{ background: "#f5f5f7", color: "#111111" }}
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-[#050508]">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,68,0.04) 0%, transparent 60%)",
-          }}
-        />
-        <div
-          className="absolute inset-x-0 top-0 h-px"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, rgba(201,168,68,0.25), transparent)",
-          }}
-        />
-      </div>
-
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Section header */}
         <motion.div
@@ -106,20 +89,20 @@ export default function ProductsSection() {
           className="text-center mb-20"
         >
           <span
-            className="inline-block text-[#C9A844] text-[10px] tracking-[0.35em] uppercase mb-5"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="inline-block text-[#5e7720] text-[10px] tracking-[0.15em] uppercase mb-5"
+            style={{ fontFamily: "var(--font-dm-mono)" }}
           >
             Tarifs
           </span>
           <h2
-            className="text-4xl lg:text-5xl text-[#F8F6F0] mb-5"
+            className="text-4xl lg:text-5xl text-[#111111] mb-5"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Choisissez votre pack
           </h2>
           <p
-            className="text-[#F8F6F0]/45 text-base max-w-md mx-auto leading-relaxed"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+            className="text-[#111111]/65 text-base max-w-md mx-auto leading-relaxed"
+            style={{ fontFamily: "var(--font-inter)" }}
           >
             Des cartes de fidélité numériques premium, personnalisées à votre
             image. Facturation mensuelle.
@@ -145,7 +128,7 @@ export default function ProductsSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.6 }}
-          className="text-center text-[#F8F6F0]/28 text-xs mt-14 tracking-wide"
+          className="text-center text-[#777777] text-xs mt-14 tracking-wide"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           Paiement sécurisé · Satisfait ou remboursé 14 jours · Support inclus
@@ -159,30 +142,30 @@ export default function ProductsSection() {
 }
 
 function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
-  const isHighlight = pack.highlight
+  // Le pack mis en avant est la carte sombre (#121212) de la section claire.
+  const dark = pack.highlight
+  const ink = dark ? "#f5f5f7" : "#111111"
+  const soft = dark ? "rgba(245,245,247,0.55)" : "rgba(17,17,17,0.55)"
+  const body = dark ? "rgba(245,245,247,0.72)" : "rgba(17,17,17,0.72)"
+  const rule = dark ? "rgba(255,255,255,0.13)" : "#dddddd"
 
   return (
     <div
       className="relative rounded-3xl p-8 flex flex-col h-full transition-transform duration-300 hover:-translate-y-1"
       style={{
-        background: isHighlight
-          ? "linear-gradient(160deg, #0e0e18 0%, #131322 50%, #0e0e18 100%)"
-          : "linear-gradient(160deg, #0a0a12 0%, #0e0e16 100%)",
-        border: isHighlight
-          ? "1px solid rgba(201,168,68,0.55)"
-          : "1px solid rgba(248,246,240,0.08)",
-        boxShadow: isHighlight
-          ? "0 0 0 1px rgba(201,168,68,0.1), 0 32px 80px rgba(0,0,0,0.6), 0 0 80px rgba(201,168,68,0.06)"
-          : "0 16px 48px rgba(0,0,0,0.5)",
+        background: dark ? "#121212" : "#f5f5f7",
+        border: dark ? "1px solid #121212" : "1px solid #dddddd",
+        color: ink,
+        boxShadow: dark ? "0 24px 60px rgba(0,0,0,0.25)" : "none",
       }}
     >
-      {/* Top shimmer line for highlight */}
-      {isHighlight && (
+      {/* Top line for highlight */}
+      {dark && (
         <div
           className="absolute top-0 inset-x-8 h-px rounded-full"
           style={{
             background:
-              "linear-gradient(90deg, transparent, #C9A844, #F0D060, #C9A844, transparent)",
+              "linear-gradient(90deg, transparent, #c8ef4a, transparent)",
           }}
         />
       )}
@@ -191,10 +174,10 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
       {pack.badge && (
         <div className="mb-5">
           <span
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] tracking-[0.2em] uppercase text-[#050508] font-semibold"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] tracking-[0.15em] uppercase text-[#111111]"
             style={{
-              background: "linear-gradient(90deg, #c9a844, #f0d060)",
-              fontFamily: "var(--font-inter)",
+              background: "#c8ef4a",
+              fontFamily: "var(--font-dm-mono)",
             }}
           >
             ★ {pack.badge}
@@ -205,14 +188,14 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
 
       {/* Pack name */}
       <h3
-        className="text-xl text-[#F8F6F0] mb-1"
-        style={{ fontFamily: "var(--font-playfair)" }}
+        className="text-xl mb-1"
+        style={{ fontFamily: "var(--font-playfair)", color: ink }}
       >
         {pack.name}
       </h3>
       <p
-        className="text-[#F8F6F0]/40 text-sm mb-8"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        className="text-sm mb-8"
+        style={{ fontFamily: "var(--font-inter)", color: soft }}
       >
         {pack.tagline}
       </p>
@@ -221,34 +204,37 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
       <div className="mb-8">
         <div className="flex items-end gap-2">
           <span
-            className="text-6xl font-bold leading-none"
+            className="text-6xl font-semibold leading-none"
             style={{
               fontFamily: "var(--font-playfair)",
-              color: isHighlight ? "#C9A844" : "#F8F6F0",
+              color: dark ? "#c8ef4a" : "#111111",
             }}
           >
             {pack.quantity}
           </span>
           <span
-            className="text-[#F8F6F0]/40 text-sm pb-2"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="text-sm pb-2"
+            style={{ fontFamily: "var(--font-inter)", color: soft }}
           >
             {pack.unit}
           </span>
         </div>
         <div
           className="mt-4 flex items-baseline gap-1"
-          style={{ borderTop: "1px solid rgba(248,246,240,0.07)", paddingTop: 16 }}
+          style={{ borderTop: `1px solid ${rule}`, paddingTop: 16 }}
         >
           <span
-            className="text-3xl font-semibold text-[#F8F6F0]"
-            style={{ fontFamily: "var(--font-playfair)" }}
+            className="text-3xl font-semibold"
+            style={{ fontFamily: "var(--font-playfair)", color: ink }}
           >
             {pack.price}€
           </span>
           <span
-            className="text-[#F8F6F0]/35 text-xs ml-1"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="text-xs ml-1"
+            style={{
+              fontFamily: "var(--font-inter)",
+              color: dark ? "#a1a1a6" : "#777777",
+            }}
           >
             par mois
           </span>
@@ -262,20 +248,20 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
             <span
               className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-[9px]"
               style={{
-                background: isHighlight
-                  ? "rgba(201,168,68,0.15)"
-                  : "rgba(29,185,84,0.15)",
-                color: isHighlight ? "#C9A844" : "#22c55e",
-                border: isHighlight
-                  ? "1px solid rgba(201,168,68,0.3)"
-                  : "1px solid rgba(34,197,94,0.3)",
+                background: dark
+                  ? "rgba(200,239,74,0.15)"
+                  : "rgba(94,119,32,0.12)",
+                color: dark ? "#c8ef4a" : "#5e7720",
+                border: dark
+                  ? "1px solid rgba(200,239,74,0.3)"
+                  : "1px solid rgba(94,119,32,0.3)",
               }}
             >
               ✓
             </span>
             <span
-              className="text-[#F8F6F0]/60 text-sm leading-snug"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              className="text-sm leading-snug"
+              style={{ fontFamily: "var(--font-inter)", color: body }}
             >
               {f}
             </span>
@@ -286,34 +272,34 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
       {/* CTA */}
       <a
         href={pack.href}
-        className="block w-full text-center py-4 rounded-2xl text-sm font-semibold tracking-wide transition-all duration-300"
+        className="block w-full text-center py-4 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300"
         style={
-          isHighlight
+          dark
             ? {
-                background: "linear-gradient(135deg, #c9a844, #d4af37)",
-                color: "#050508",
-                boxShadow: "0 8px 32px rgba(201,168,68,0.28)",
+                background: "#c8ef4a",
+                color: "#111111",
+                boxShadow: "0 8px 32px rgba(200,239,74,0.25)",
                 fontFamily: "var(--font-inter)",
               }
             : {
-                border: "1px solid rgba(201,168,68,0.4)",
-                color: "#C9A844",
+                border: "1px solid #111111",
+                color: "#111111",
                 background: "transparent",
                 fontFamily: "var(--font-inter)",
               }
         }
         onMouseEnter={(e) => {
-          if (!isHighlight) {
-            e.currentTarget.style.background = "rgba(201,168,68,0.08)"
+          if (!dark) {
+            e.currentTarget.style.background = "rgba(17,17,17,0.06)"
           } else {
-            e.currentTarget.style.boxShadow = "0 12px 40px rgba(201,168,68,0.4)"
+            e.currentTarget.style.boxShadow = "0 12px 40px rgba(200,239,74,0.4)"
           }
         }}
         onMouseLeave={(e) => {
-          if (!isHighlight) {
+          if (!dark) {
             e.currentTarget.style.background = "transparent"
           } else {
-            e.currentTarget.style.boxShadow = "0 8px 32px rgba(201,168,68,0.28)"
+            e.currentTarget.style.boxShadow = "0 8px 32px rgba(200,239,74,0.25)"
           }
         }}
       >

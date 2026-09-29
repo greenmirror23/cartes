@@ -20,10 +20,10 @@ export default function Header() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
         background: scrolled
-          ? "rgba(5,5,8,0.85)"
+          ? "rgba(0,0,0,0.85)"
           : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(201,168,68,0.15)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.10)" : "none",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -38,7 +38,7 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="text-[#F8F6F0]/60 hover:text-[#C9A844] text-sm tracking-wide transition-colors duration-200"
+              className="text-[#a1a1a6] hover:text-[#f5f5f7] text-[12px] tracking-wide transition-colors duration-200"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {item.label}
@@ -48,18 +48,18 @@ export default function Header() {
 
         <a
           href="#products"
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm tracking-wide transition-all duration-300 text-[#C9A844]"
+          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] tracking-wide transition-all duration-300 text-[#f5f5f7]"
           style={{
-            border: "1px solid rgba(201,168,68,0.45)",
+            border: "1px solid rgba(255,255,255,0.27)",
             fontFamily: "var(--font-inter)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(201,168,68,0.08)"
-            e.currentTarget.style.borderColor = "rgba(201,168,68,0.8)"
+            e.currentTarget.style.background = "rgba(255,255,255,0.08)"
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)"
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "transparent"
-            e.currentTarget.style.borderColor = "rgba(201,168,68,0.45)"
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.27)"
           }}
         >
           Voir les packs →
@@ -78,12 +78,12 @@ function Logo() {
         width={46}
         height={59}
         priority
-        className="h-11 w-auto drop-shadow-[0_2px_8px_rgba(201,168,68,0.25)]"
+        className="h-11 w-auto drop-shadow-[0_2px_8px_rgba(200,239,74,0.25)]"
       />
       <div>
         <div
-          className="text-white text-[17px] font-semibold leading-none tracking-wide"
-          style={{ fontFamily: "var(--font-playfair)" }}
+          className="text-[#f5f5f7] text-[12px] leading-none tracking-[0.08em] uppercase"
+          style={{ fontFamily: "var(--font-dm-mono)" }}
         >
           GreenMirror
         </div>

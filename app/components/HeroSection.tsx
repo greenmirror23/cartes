@@ -11,10 +11,10 @@ import {
 import { BarberPass, PizzaPass, GreenMirrorPass } from "./WalletPass"
 
 const STEPS = [
-  { step: "Étape 1", text: "Vos clients reçoivent un lien par SMS." },
+  { step: "Étape 1", text: "Le client scanne votre QR code." },
   { step: "Étape 2", text: "La carte s'installe dans le Wallet, sans app." },
   { step: "Étape 3", text: "Elle rejoint les cartes de leur quotidien." },
-  { step: "Et voilà", text: "GreenMirror dans leur poche, pour toujours." },
+  { step: "Et voilà", text: "Votre marque dans leur poche, pour toujours." },
 ]
 
 export default function HeroSection() {
@@ -54,76 +54,62 @@ export default function HeroSection() {
     >
       <div className="sticky top-0 h-[100dvh] flex items-start lg:items-center overflow-hidden">
         {/* Background layers */}
-        <div className="absolute inset-0 bg-[#050508]">
+        <div className="absolute inset-0 bg-black">
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 35% 50%, rgba(29,185,84,0.06) 0%, transparent 70%)",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 50% 50% at 75% 45%, rgba(201,168,68,0.05) 0%, transparent 65%)",
-            }}
-          />
-          <div
-            className="absolute inset-0 opacity-[0.025]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(201,168,68,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,68,1) 1px, transparent 1px)",
-              backgroundSize: "90px 90px",
+                "radial-gradient(ellipse 70% 65% at 68% 52%, #333c1f 0%, #080906 42%, #000000 78%)",
             }}
           />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20 lg:pt-24 pb-10">
-          <div className="grid lg:grid-cols-2 gap-3 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-[1.3fr_1fr] gap-3 lg:gap-10 items-center">
             {/* Left: copy */}
             <div>
-              <motion.div
+              <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="mb-6"
+                className="uppercase"
+                style={{
+                  fontFamily: "var(--font-dm-mono)",
+                  fontSize: 10,
+                  letterSpacing: "1.5px",
+                  color: "#c8ef4a",
+                }}
               >
-                <span
-                  className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-[#C9A844] text-xs tracking-[0.22em] uppercase"
-                  style={{
-                    border: "1px solid rgba(201,168,68,0.3)",
-                    background: "rgba(201,168,68,0.05)",
-                    fontFamily: "var(--font-inter)",
-                  }}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#22c55e] inline-block"
-                    style={{ animation: "glow-pulse 2s ease-in-out infinite" }}
-                  />
-                  Cartes de fidélité numériques
-                </span>
-              </motion.div>
+                La fidélité, réimaginée
+              </motion.p>
 
               <motion.h1
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.3 }}
-                className="text-[2rem] sm:text-4xl lg:text-[3.3rem] leading-[1.08] mb-4 sm:mb-6"
-                style={{ fontFamily: "var(--font-playfair)" }}
+                className="text-[clamp(34px,10.5vw,46px)] lg:text-[clamp(44px,7vw,96px)]"
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontWeight: 600,
+                  lineHeight: 0.9,
+                  letterSpacing: "-0.048em",
+                  margin: "20px 0",
+                }}
               >
-                Vos clients portent{" "}
-                <span className="gold-shimmer italic">votre marque</span>
+                Le retour
                 <br />
-                dans leur poche
+                <span className="whitespace-nowrap">
+                  devient{" "}
+                  <em style={{ color: "#aaaaaa", fontStyle: "italic" }}>un réflexe.</em>
+                </span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.45 }}
-                className="hidden sm:block text-[#F8F6F0]/55 text-base lg:text-lg leading-relaxed mb-8 max-w-md"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                className="hidden sm:block text-[#a1a1a6] text-base lg:text-lg leading-relaxed mb-8 max-w-md"
+                style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
               >
                 Des cartes de fidélité numériques premium, personnalisées à votre
                 image et intégrées directement dans l&apos;Apple Wallet et Google
@@ -138,11 +124,11 @@ export default function HeroSection() {
               >
                 <a
                   href="#products"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-sm tracking-wide font-semibold transition-all duration-300 group"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-[13px] tracking-wide font-bold transition-all duration-300 group"
                   style={{
-                    background: "linear-gradient(135deg, #c9a844, #d4af37)",
-                    color: "#050508",
-                    boxShadow: "0 8px 32px rgba(201,168,68,0.28)",
+                    background: "#f5f5f7",
+                    color: "#111111",
+                    boxShadow: "0 8px 32px rgba(245,245,247,0.12)",
                     fontFamily: "var(--font-inter)",
                   }}
                 >
@@ -168,14 +154,14 @@ export default function HeroSection() {
                     className="absolute inset-0 flex flex-col justify-center items-center"
                   >
                     <span
-                      className="text-[#C9A844] text-[10px] tracking-[0.3em] uppercase mb-1.5"
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      className="text-[#c8ef4a] text-[10px] tracking-[0.15em] uppercase mb-1.5"
+                      style={{ fontFamily: "var(--font-dm-mono)" }}
                     >
                       {STEPS[activeStep].step}
                     </span>
                     <p
-                      className="text-[#F8F6F0]/60 text-sm"
-                      style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                      className="text-[#a1a1a6] text-sm"
+                      style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
                     >
                       {STEPS[activeStep].text}
                     </p>
@@ -190,7 +176,7 @@ export default function HeroSection() {
                   style={{
                     inset: "-40px",
                     background:
-                      "radial-gradient(circle at 50% 55%, rgba(201,168,68,0.14) 0%, rgba(34,197,94,0.06) 45%, transparent 70%)",
+                      "radial-gradient(circle at 50% 55%, rgba(200,239,74,0.16) 0%, rgba(200,239,74,0.05) 45%, transparent 70%)",
                   }}
                 />
 
@@ -203,7 +189,7 @@ export default function HeroSection() {
                         "0 0 0 1px #3d3d3d",
                         "0 0 0 2px #1a1a1a",
                         "0 48px 96px rgba(0,0,0,0.85)",
-                        "0 0 60px rgba(201,168,68,0.08)",
+                        "0 0 60px rgba(200,239,74,0.08)",
                         "inset 0 1px 0 rgba(255,255,255,0.06)",
                       ].join(", "),
                     }}
@@ -304,8 +290,8 @@ export default function HeroSection() {
           style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
         >
           <span
-            className="text-[#F8F6F0]/25 text-[10px] tracking-[0.3em] uppercase"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="text-[#777777] text-[10px] tracking-[0.15em] uppercase"
+            style={{ fontFamily: "var(--font-dm-mono)" }}
           >
             Faites défiler
           </span>
@@ -313,7 +299,7 @@ export default function HeroSection() {
             className="w-px h-9 rounded-full"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(201,168,68,0.6), transparent)",
+                "linear-gradient(to bottom, rgba(200,239,74,0.6), transparent)",
             }}
             animate={{ scaleY: [1, 0.4, 1], opacity: [0.5, 1, 0.5] }}
             transition={{ repeat: Infinity, duration: 2.2 }}
