@@ -13,8 +13,8 @@ const COULEUR_PAR_DEFAUT = "#0B0B12"
 
 const styleChamp: React.CSSProperties = {
   background: "rgba(255,255,255,0.03)",
-  border: "1px solid rgba(248,246,240,0.12)",
-  color: "#F8F6F0",
+  border: "1px solid rgba(245,245,247,0.12)",
+  color: "#f5f5f7",
   fontFamily: "var(--font-inter)",
 }
 
@@ -107,19 +107,19 @@ export default function FormulairePage() {
   return (
     <main className="relative min-h-screen">
       {/* Fond */}
-      <div className="fixed inset-0 -z-10 bg-[#050508]">
+      <div className="fixed inset-0 -z-10 bg-black">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,68,0.06) 0%, transparent 60%)",
+              "radial-gradient(ellipse 70% 50% at 50% 0%, #333c1f 0%, transparent 60%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 20% 80%, rgba(29,185,84,0.05) 0%, transparent 65%)",
+              "radial-gradient(ellipse 60% 50% at 20% 80%, rgba(200,239,74,0.04) 0%, transparent 65%)",
           }}
         />
       </div>
@@ -134,11 +134,11 @@ export default function FormulairePage() {
               width={40}
               height={51}
               priority
-              className="h-10 w-auto drop-shadow-[0_2px_8px_rgba(201,168,68,0.25)]"
+              className="h-10 w-auto drop-shadow-[0_2px_8px_rgba(200,239,74,0.25)]"
             />
             <span
-              className="text-white text-[16px] font-semibold tracking-wide"
-              style={{ fontFamily: "var(--font-playfair)" }}
+              className="text-[#f5f5f7] text-[12px] tracking-[0.08em] uppercase"
+              style={{ fontFamily: "var(--font-dm-mono)" }}
             >
               GreenMirror
             </span>
@@ -150,20 +150,20 @@ export default function FormulairePage() {
         ) : (
           <>
             <span
-              className="inline-block text-[#C9A844] text-[10px] tracking-[0.35em] uppercase mb-5"
-              style={{ fontFamily: "var(--font-inter)" }}
+              className="inline-block text-[#c8ef4a] text-[10px] tracking-[0.15em] uppercase mb-5"
+              style={{ fontFamily: "var(--font-dm-mono)" }}
             >
               Étape finale
             </span>
             <h1
-              className="text-3xl sm:text-4xl text-[#F8F6F0] mb-4 leading-tight"
+              className="text-3xl sm:text-4xl text-[#f5f5f7] mb-4 leading-tight"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Personnalisez <span className="gold-shimmer italic">votre carte</span>
+              Personnalisez <span className="italic text-[#aaaaaa]">votre carte</span>
             </h1>
             <p
-              className="text-[#F8F6F0]/45 text-sm leading-relaxed mb-12 max-w-lg"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              className="text-[#a1a1a6] text-sm leading-relaxed mb-12 max-w-lg"
+              style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
             >
               Merci pour votre commande. Quelques informations suffisent pour
               créer votre carte de fidélité aux couleurs de votre établissement.
@@ -174,8 +174,8 @@ export default function FormulairePage() {
               className="rounded-3xl p-7 sm:p-9 space-y-7"
               style={{
                 background:
-                  "linear-gradient(160deg, #0a0a12 0%, #0e0e16 100%)",
-                border: "1px solid rgba(248,246,240,0.08)",
+                  "linear-gradient(160deg, #0b0b0b 0%, #121212 100%)",
+                border: "1px solid rgba(245,245,247,0.08)",
                 boxShadow: "0 16px 48px rgba(0,0,0,0.5)",
               }}
             >
@@ -189,11 +189,11 @@ export default function FormulairePage() {
                   className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
                   style={styleChamp}
                   onFocus={(e) =>
-                    (e.currentTarget.style.borderColor = "rgba(201,168,68,0.6)")
+                    (e.currentTarget.style.borderColor = "rgba(200,239,74,0.6)")
                   }
                   onBlur={(e) =>
                     (e.currentTarget.style.borderColor =
-                      "rgba(248,246,240,0.12)")
+                      "rgba(245,245,247,0.12)")
                   }
                 />
               </Champ>
@@ -237,13 +237,13 @@ export default function FormulairePage() {
                   style={styleChamp}
                 >
                   <span
-                    className="text-[#C9A844] text-base leading-none"
+                    className="text-[#c8ef4a] text-base leading-none"
                     aria-hidden="true"
                   >
                     ↑
                   </span>
                   <span
-                    className={logo ? "text-[#F8F6F0]" : "text-[#F8F6F0]/35"}
+                    className={logo ? "text-[#f5f5f7]" : "text-[#777777]"}
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {logo ? logo.name : "Choisir un fichier"}
@@ -266,7 +266,7 @@ export default function FormulairePage() {
                             champFichier.current.value = ""
                         }
                       }}
-                      className="ml-auto text-[#F8F6F0]/40 hover:text-[#C9A844] text-xs"
+                      className="ml-auto text-[#a1a1a6] hover:text-[#c8ef4a] text-xs"
                       style={{ fontFamily: "var(--font-inter)" }}
                     >
                       Retirer
@@ -285,22 +285,22 @@ export default function FormulairePage() {
                     className="w-[18px] h-[18px] rounded-[5px] flex items-center justify-center flex-shrink-0 transition-all duration-200"
                     style={{
                       background: sansLogo
-                        ? "linear-gradient(135deg, #c9a844, #d4af37)"
+                        ? "#c8ef4a"
                         : "rgba(255,255,255,0.03)",
                       border: sansLogo
-                        ? "1px solid #c9a844"
-                        : "1px solid rgba(248,246,240,0.2)",
+                        ? "1px solid #c8ef4a"
+                        : "1px solid rgba(245,245,247,0.2)",
                     }}
                   >
                     {sansLogo && (
-                      <span className="text-[#050508] text-[11px] leading-none font-bold">
+                      <span className="text-[#111111] text-[11px] leading-none font-bold">
                         ✓
                       </span>
                     )}
                   </span>
                   <span
-                    className="text-[#F8F6F0]/55 text-sm group-hover:text-[#F8F6F0]/80 transition-colors"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                    className="text-[#a1a1a6] text-sm group-hover:text-[#f5f5f7] transition-colors"
+                    style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
                   >
                     Je n&apos;ai pas de logo
                   </span>
@@ -320,11 +320,11 @@ export default function FormulairePage() {
                   className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
                   style={styleChamp}
                   onFocus={(e) =>
-                    (e.currentTarget.style.borderColor = "rgba(201,168,68,0.6)")
+                    (e.currentTarget.style.borderColor = "rgba(200,239,74,0.6)")
                   }
                   onBlur={(e) =>
                     (e.currentTarget.style.borderColor =
-                      "rgba(248,246,240,0.12)")
+                      "rgba(245,245,247,0.12)")
                   }
                 />
               </Champ>
@@ -339,11 +339,11 @@ export default function FormulairePage() {
                   className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
                   style={styleChamp}
                   onFocus={(e) =>
-                    (e.currentTarget.style.borderColor = "rgba(201,168,68,0.6)")
+                    (e.currentTarget.style.borderColor = "rgba(200,239,74,0.6)")
                   }
                   onBlur={(e) =>
                     (e.currentTarget.style.borderColor =
-                      "rgba(248,246,240,0.12)")
+                      "rgba(245,245,247,0.12)")
                   }
                 />
               </Champ>
@@ -359,11 +359,11 @@ export default function FormulairePage() {
                   className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors duration-200"
                   style={styleChamp}
                   onFocus={(e) =>
-                    (e.currentTarget.style.borderColor = "rgba(201,168,68,0.6)")
+                    (e.currentTarget.style.borderColor = "rgba(200,239,74,0.6)")
                   }
                   onBlur={(e) =>
                     (e.currentTarget.style.borderColor =
-                      "rgba(248,246,240,0.12)")
+                      "rgba(245,245,247,0.12)")
                   }
                 />
               </Champ>
@@ -376,16 +376,16 @@ export default function FormulairePage() {
                     value={couleurFond ?? COULEUR_PAR_DEFAUT}
                     onChange={(e) => setCouleurFond(e.target.value)}
                     className="w-14 h-11 rounded-xl cursor-pointer bg-transparent p-1"
-                    style={{ border: "1px solid rgba(248,246,240,0.12)" }}
+                    style={{ border: "1px solid rgba(245,245,247,0.12)" }}
                   />
                   <span
                     className="text-sm"
                     style={{
                       fontFamily: "var(--font-inter)",
-                      fontWeight: 300,
+                      fontWeight: 400,
                       color: couleurFond
-                        ? "#F8F6F0"
-                        : "rgba(248,246,240,0.35)",
+                        ? "#f5f5f7"
+                        : "rgba(245,245,247,0.35)",
                     }}
                   >
                     {couleurFond ?? "Aucune couleur choisie"}
@@ -394,7 +394,7 @@ export default function FormulairePage() {
                     <button
                       type="button"
                       onClick={() => setCouleurFond(null)}
-                      className="text-[#F8F6F0]/40 hover:text-[#C9A844] text-xs transition-colors"
+                      className="text-[#a1a1a6] hover:text-[#c8ef4a] text-xs transition-colors"
                       style={{ fontFamily: "var(--font-inter)" }}
                     >
                       Effacer
@@ -411,7 +411,7 @@ export default function FormulairePage() {
                     border: "1px solid rgba(220,38,38,0.3)",
                     color: "#fca5a5",
                     fontFamily: "var(--font-inter)",
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   {erreur}
@@ -423,9 +423,9 @@ export default function FormulairePage() {
                 disabled={etat === "envoi"}
                 className="w-full py-4 rounded-2xl text-sm font-semibold tracking-wide transition-all duration-300 disabled:opacity-60 disabled:cursor-wait"
                 style={{
-                  background: "linear-gradient(135deg, #c9a844, #d4af37)",
-                  color: "#050508",
-                  boxShadow: "0 8px 32px rgba(201,168,68,0.28)",
+                  background: "#c8ef4a",
+                  color: "#111111",
+                  boxShadow: "0 8px 32px rgba(200,239,74,0.28)",
                   fontFamily: "var(--font-inter)",
                 }}
               >
@@ -433,7 +433,7 @@ export default function FormulairePage() {
               </button>
 
               <p
-                className="text-center text-[#F8F6F0]/25 text-xs"
+                className="text-center text-[#777777] text-xs"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 Les champs marqués d&apos;une étoile sont obligatoires.
@@ -451,7 +451,7 @@ function Succes() {
     <div
       className="rounded-3xl p-10 sm:p-12 text-center"
       style={{
-        background: "linear-gradient(160deg, #0a0a12 0%, #0e0e16 100%)",
+        background: "linear-gradient(160deg, #0b0b0b 0%, #121212 100%)",
         border: "1px solid rgba(34,197,94,0.3)",
         boxShadow: "0 16px 48px rgba(0,0,0,0.5)",
       }}
@@ -460,22 +460,22 @@ function Succes() {
         className="w-16 h-16 rounded-full mx-auto mb-7 flex items-center justify-center"
         style={{
           background:
-            "radial-gradient(circle at 35% 30%, #3ddc7a 0%, #1a8f47 70%)",
+            "radial-gradient(circle at 35% 30%, #dcf58a 0%, #a8d12f 70%)",
           boxShadow: "0 6px 24px rgba(34,197,94,0.35)",
         }}
       >
-        <span className="text-[#04230f] text-2xl leading-none font-bold">✓</span>
+        <span className="text-[#111111] text-2xl leading-none font-bold">✓</span>
       </div>
 
       <h1
-        className="text-2xl sm:text-3xl text-[#F8F6F0] mb-4"
+        className="text-2xl sm:text-3xl text-[#f5f5f7] mb-4"
         style={{ fontFamily: "var(--font-playfair)" }}
       >
         C&apos;est enregistré
       </h1>
       <p
-        className="text-[#F8F6F0]/55 text-sm leading-relaxed max-w-sm mx-auto"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        className="text-[#a1a1a6] text-sm leading-relaxed max-w-sm mx-auto"
+        style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
       >
         Votre carte est en cours de création, vous la recevrez dans quelques
         secondes.
@@ -483,9 +483,9 @@ function Succes() {
 
       <a
         href="/"
-        className="inline-block mt-9 px-7 py-3 rounded-full text-sm tracking-wide text-[#C9A844] transition-all duration-300"
+        className="inline-block mt-9 px-7 py-3 rounded-full text-sm tracking-wide text-[#c8ef4a] transition-all duration-300"
         style={{
-          border: "1px solid rgba(201,168,68,0.45)",
+          border: "1px solid rgba(200,239,74,0.45)",
           fontFamily: "var(--font-inter)",
         }}
       >
@@ -509,17 +509,17 @@ function Champ({
   return (
     <div>
       <label
-        className="block text-[#F8F6F0]/50 text-[10px] tracking-[0.22em] uppercase mb-3"
-        style={{ fontFamily: "var(--font-inter)" }}
+        className="block text-[#a1a1a6] text-[10px] tracking-[0.15em] uppercase mb-3"
+        style={{ fontFamily: "var(--font-dm-mono)" }}
       >
         {label}
-        {obligatoire && <span className="text-[#C9A844] ml-1">*</span>}
+        {obligatoire && <span className="text-[#c8ef4a] ml-1">*</span>}
       </label>
       {children}
       {aide && (
         <p
-          className="text-[#F8F6F0]/25 text-xs mt-2"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          className="text-[#777777] text-xs mt-2"
+          style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
         >
           {aide}
         </p>
@@ -548,26 +548,26 @@ function Liste({
         className="w-full rounded-xl px-4 py-3 text-sm outline-none appearance-none cursor-pointer transition-colors duration-200"
         style={{
           ...styleChamp,
-          color: valeur ? "#F8F6F0" : "rgba(248,246,240,0.35)",
+          color: valeur ? "#f5f5f7" : "rgba(245,245,247,0.35)",
         }}
         onFocus={(e) =>
-          (e.currentTarget.style.borderColor = "rgba(201,168,68,0.6)")
+          (e.currentTarget.style.borderColor = "rgba(200,239,74,0.6)")
         }
         onBlur={(e) =>
-          (e.currentTarget.style.borderColor = "rgba(248,246,240,0.12)")
+          (e.currentTarget.style.borderColor = "rgba(245,245,247,0.12)")
         }
       >
-        <option value="" style={{ background: "#0e0e16" }}>
+        <option value="" style={{ background: "#121212" }}>
           Sélectionnez…
         </option>
         {options.map((o) => (
-          <option key={o} value={o} style={{ background: "#0e0e16" }}>
+          <option key={o} value={o} style={{ background: "#121212" }}>
             {o}
           </option>
         ))}
       </select>
       <span
-        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#C9A844] text-xs"
+        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#c8ef4a] text-xs"
         aria-hidden="true"
       >
         ▾
