@@ -9,6 +9,10 @@ import {
   useMotionValueEvent,
 } from "framer-motion"
 import { BarberPass, PizzaPass, GreenMirrorPass } from "./WalletPass"
+import Velaris from "@/components/ui/velaris"
+
+// Palette autour du vert #009929, assombrie sur les bords pour garder le texte lisible
+const HERO_COLORS = ["#00661b", "#009929", "#003d10", "#000000"]
 
 const STEPS = [
   { step: "Étape 1", text: "Le client scanne votre QR code." },
@@ -34,14 +38,15 @@ export default function HeroSection() {
   const PEEK = 40
   const ENTER = 470 // départ sous la zone visible (les cartes glissent, sans fondu)
 
-  const bankY   = useTransform(scrollYProgress, [0,    0.12], [ENTER, 0])
-  const barberY = useTransform(scrollYProgress, [0.18, 0.34], [ENTER, PEEK])
-  const pizzaY  = useTransform(scrollYProgress, [0.40, 0.56], [ENTER, PEEK * 2])
-  const gmY     = useTransform(scrollYProgress, [0.62, 0.78], [ENTER, PEEK * 3])
+  // La carte bancaire est déjà dans le Wallet : elle ne bouge pas. Le scroll démarre
+  // directement avec l'arrivée de la première carte, pour ne pas perdre de temps.
+  const barberY = useTransform(scrollYProgress, [0,    0.20], [ENTER, PEEK])
+  const pizzaY  = useTransform(scrollYProgress, [0.28, 0.48], [ENTER, PEEK * 2])
+  const gmY     = useTransform(scrollYProgress, [0.56, 0.76], [ENTER, PEEK * 3])
 
   const [activeStep, setActiveStep] = useState(0)
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const next = v < 0.20 ? 0 : v < 0.42 ? 1 : v < 0.64 ? 2 : 3
+    const next = v < 0.24 ? 0 : v < 0.52 ? 1 : v < 0.80 ? 2 : 3
     setActiveStep((prev) => (prev === next ? prev : next))
   })
 
@@ -50,16 +55,24 @@ export default function HeroSection() {
       id="wallet"
       ref={containerRef}
       className="relative"
-      style={{ height: "300vh" }}
+      style={{ height: "260vh" }}
     >
       <div className="sticky top-0 h-[100dvh] flex items-start lg:items-center overflow-hidden">
-        {/* Background layers */}
+        {/* Fond animé WebGL (Velaris) aux couleurs de la marque */}
         <div className="absolute inset-0 bg-black">
+          <Velaris
+            height="100%"
+            bg="#000000"
+            colors={HERO_COLORS}
+            speed={1.1}
+            grain={0.35}
+          />
+          {/* Voile sombre à gauche pour garder le titre bien lisible */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 70% 65% at 68% 52%, #333c1f 0%, #080906 42%, #000000 78%)",
+                "linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)",
             }}
           />
         </div>
@@ -220,7 +233,7 @@ export default function HeroSection() {
                       {/* Status bar */}
                       <div className="flex justify-between items-center px-7 pt-4 pb-1 flex-shrink-0">
                         <span className="text-white text-[11px] font-semibold">
-                          9:41
+                          9:23
                         </span>
                         <div className="flex items-center gap-1.5">
                           <svg width="17" height="11" viewBox="0 0 18 11" fill="none">
@@ -257,9 +270,9 @@ export default function HeroSection() {
 
                       {/* Cards clip zone */}
                       <div className="relative mx-3 overflow-hidden flex-1">
-                        <motion.div className="absolute inset-x-0" style={{ y: bankY, zIndex: 1 }}>
+                        <div className="absolute inset-x-0" style={{ zIndex: 1 }}>
                           <BankCard />
-                        </motion.div>
+                        </div>
                         <motion.div className="absolute inset-x-0 mx-0.5" style={{ y: barberY, zIndex: 2 }}>
                           <BarberPass />
                         </motion.div>
