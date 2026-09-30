@@ -17,6 +17,13 @@ const NOTIFICATIONS = [
     title: "Vous n'êtes pas loin, passez nous faire un coucou 🍕🍕",
     text: "",
   },
+  {
+    sender: "Le Nul Bar Ailleurs",
+    logo: "/passes/logo-nulbar.webp",
+    logoFill: true,
+    title: "Viens voir le match de l'équipe de France demain à 21h00 avec nous. Nous t'attendons avec impatience ⚽🍹🎉",
+    text: "",
+  },
 ]
 
 export default function NotificationSection() {
@@ -77,6 +84,13 @@ export default function NotificationSection() {
         >
           Quand la récompense approche, la carte réapparaît. Subtilement. Au
           moment où votre client a une raison de revenir.
+          <br className="hidden sm:block" />
+          <span className="text-[#f5f5f7]">
+            Vos notifications sont personnalisées
+          </span>
+          {" "}: géolocalisées quand il passe à côté de chez vous, ou pensées
+          pour un événement, comme un match, une soirée ou une nouveauté.
+          Vous choisissez le moment, le ton et les mots.
         </motion.p>
 
         {/* Notifications */}
