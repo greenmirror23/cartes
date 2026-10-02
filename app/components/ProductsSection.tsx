@@ -9,13 +9,15 @@ const PACKS = [
     quantity: "200",
     unit: "cartes numériques",
     price: "50",
+    withOption: "79",
     badge: null,
     features: [
       "200 cartes numériques personnalisées",
       "Compatible Apple Wallet & Google Wallet",
       "QR code intégré et scannable",
       "Design aux couleurs de votre marque",
-      "Tableau de bord de gestion",
+      "Notifications automatiques et géolocalisées",
+      "Espace commerçant : cartes délivrées, restantes et fichier clients",
       "Support par email",
       "Livraison sous 48h",
     ],
@@ -29,14 +31,15 @@ const PACKS = [
     quantity: "500",
     unit: "cartes numériques",
     price: "95",
+    withOption: "124",
     badge: null,
     features: [
       "500 cartes numériques personnalisées",
       "Compatible Apple Wallet & Google Wallet",
       "QR code intégré et scannable",
       "Design aux couleurs de votre marque",
-      "Tableau de bord avancé + analytics",
-      "Notifications push automatiques",
+      "Notifications automatiques et géolocalisées",
+      "Espace commerçant : cartes délivrées, restantes et fichier clients",
       "Support prioritaire (réponse < 4h)",
       "Livraison sous 48h",
       "Renouvellement facilité",
@@ -51,14 +54,16 @@ const PACKS = [
     quantity: "1000",
     unit: "cartes numériques",
     price: "160",
+    withOption: null,
     badge: null,
     features: [
       "1000 cartes numériques personnalisées",
       "Compatible Apple Wallet & Google Wallet",
       "QR code intégré et scannable",
       "Design premium sur mesure",
-      "Tableau de bord avancé + analytics",
-      "Notifications push illimitées",
+      "Notifications automatiques et géolocalisées",
+      "Notifications personnalisées incluses (4 campagnes par mois)",
+      "Espace commerçant : cartes délivrées, restantes et fichier clients",
       "Support dédié (réponse < 2h)",
       "Livraison sous 48h",
       "Renouvellement prioritaire",
@@ -123,6 +128,80 @@ export default function ProductsSection() {
           ))}
         </div>
 
+        {/* Option notifications personnalisées */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="max-w-6xl mx-auto mt-6 rounded-3xl p-8 md:p-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-center"
+          style={{ border: "1px solid #dddddd", background: "#ffffff" }}
+        >
+          <div>
+            <span
+              className="inline-block text-[#5e7720] text-[10px] tracking-[0.15em] uppercase mb-4"
+              style={{ fontFamily: "var(--font-dm-mono)" }}
+            >
+              Option
+            </span>
+            <h3
+              className="text-2xl lg:text-3xl text-[#111111] mb-3"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              Notifications personnalisées
+            </h3>
+            <p
+              className="text-[#111111]/70 text-sm leading-relaxed max-w-xl mb-5"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              Un événement, une offre du jour, un créneau libre : vous écrivez
+              le message, vous choisissez le jour et l&apos;heure, il apparaît
+              sur l&apos;écran verrouillé de vos clients. Tout se gère depuis
+              votre espace commerçant, sans nous appeler.
+            </p>
+            <ul
+              className="grid gap-2 text-sm text-[#111111]/75"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              <li>2 campagnes par mois sur Small et Medium, 4 sur Large</li>
+              <li>Prénom du client intégré au message</li>
+              <li>Incluse dans le pack Large, ajoutable aux autres à tout moment</li>
+            </ul>
+          </div>
+          <div className="md:text-right">
+            <div className="flex items-baseline gap-1 md:justify-end">
+              <span
+                className="text-4xl font-semibold text-[#111111]"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                +29€
+              </span>
+              <span
+                className="text-xs text-[#777777]"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                par mois
+              </span>
+            </div>
+            <p
+              className="text-xs text-[#777777] mt-2 mb-5"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              Small 79€ · Medium 124€ · Large 160€
+            </p>
+            <a
+              href="mailto:contact@greenmirror.fr?subject=Option%20notifications%20personnalis%C3%A9es"
+              className="inline-block text-center px-6 py-3 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300"
+              style={{
+                border: "1px solid #111111",
+                color: "#111111",
+                fontFamily: "var(--font-inter)",
+              }}
+            >
+              Ajouter l&apos;option →
+            </a>
+          </div>
+        </motion.div>
+
         {/* Trust line */}
         <motion.p
           initial={{ opacity: 0 }}
@@ -132,6 +211,8 @@ export default function ProductsSection() {
           style={{ fontFamily: "var(--font-inter)" }}
         >
           Paiement sécurisé · Satisfait ou remboursé 14 jours · Support inclus
+          <br />
+          TVA non applicable, art. 293 B du CGI
         </motion.p>
       </div>
 
@@ -239,6 +320,17 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
             par mois
           </span>
         </div>
+        <p
+          className="mt-2 text-xs leading-snug min-h-[2.6em]"
+          style={{
+            fontFamily: "var(--font-inter)",
+            color: dark ? "#a1a1a6" : "#777777",
+          }}
+        >
+          {pack.withOption
+            ? `${pack.withOption} € par mois avec les notifications personnalisées`
+            : "Notifications personnalisées incluses"}
+        </p>
       </div>
 
       {/* Features */}
