@@ -154,7 +154,7 @@ export function PizzaPass() {
       statusValue="Active"
       strip="/passes/strip-pizza.webp"
       counter={{ value: "0", label: "Pizzas" }}
-      objective={{ label: "Objectif", value: "10 pizzas = la 11ème 🎁" }}
+      objective={{ label: "Objectif", value: "9 pizzas = la 10ème 🎁" }}
       qr="/passes/qr-pizza.svg"
       labelColor="rgba(255,255,255,0.85)"
     />
