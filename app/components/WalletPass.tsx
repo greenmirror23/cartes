@@ -19,6 +19,8 @@ export type WalletPassProps = {
   /** Si absent, seule la valeur du statut est affichée (cas du pass Barber) */
   statusLabel?: string
   statusValue: string
+  /** Champ d'en-tête supplémentaire, affiché avant le statut (ex. TAMPONS 2 sur 9) */
+  headerField?: { label: string; value: string }
   strip: string
   counter?: { value: string; label: string }
   objective: { label?: string; value: string }
@@ -34,6 +36,7 @@ export default function WalletPass({
   name,
   statusLabel,
   statusValue,
+  headerField,
   strip,
   counter,
   objective,
@@ -69,6 +72,17 @@ export default function WalletPass({
           <span className="flex-1 min-w-0 truncate text-[9.5px] font-medium leading-none">
             {name}
           </span>
+        )}
+        {headerField && (
+          <div className="flex-shrink-0 text-right leading-none mr-[4px]">
+            <div
+              className="text-[5.5px] font-semibold tracking-[0.04em] uppercase mb-[2px]"
+              style={{ color: labelColor }}
+            >
+              {headerField.label}
+            </div>
+            <div className="text-[11px] whitespace-nowrap">{headerField.value}</div>
+          </div>
         )}
         <div className={`${name ? "" : "ml-auto"} flex-shrink-0 text-right leading-none`}>
           {statusLabel && (
@@ -139,7 +153,7 @@ export function BarberPass() {
       statusValue="Active"
       strip="/passes/strip-barber.webp"
       objective={{ value: "10 coupes ✂️ = 10ème 🎁" }}
-      qr="/passes/qr-barber.svg"
+      qr="/passes/qr-greenmirror.svg"
     />
   )
 }
@@ -149,13 +163,13 @@ export function PizzaPass() {
     <WalletPass
       background="#58391C"
       logo={{ src: "/passes/logo-4saisons.webp", width: 34, height: 33, rounded: true }}
-      name="Pizzas des 4 Saisons DE…"
+      name="Pizzas 4 Saisons"
       statusLabel="Statut"
       statusValue="Active"
-      strip="/passes/strip-pizza.webp"
-      counter={{ value: "0", label: "Pizzas" }}
-      objective={{ label: "Objectif", value: "9 pizzas = la 10ème 🎁" }}
-      qr="/passes/qr-pizza.svg"
+      headerField={{ label: "Tampons", value: "2 sur 9" }}
+      strip="/passes/strip-pizza-tampons.webp"
+      objective={{ label: "Objectif", value: "9 tampons = 10ème pizza offerte 🎁" }}
+      qr="/passes/qr-greenmirror.svg"
       labelColor="rgba(255,255,255,0.85)"
     />
   )
@@ -167,13 +181,13 @@ export function GreenMirrorPass() {
       background="#000"
       outlined
       logo={{ src: "/greenmirror-emblem.png", width: 26, height: 33 }}
-      name="Green Mirror DEMO PASS"
+      name="Green Mirror"
       statusLabel="Statut"
       statusValue="Active"
       strip="/passes/strip-gm.webp"
-      counter={{ value: "0", label: "Points" }}
-      objective={{ label: "Objectif", value: "10 points" }}
-      qr="/passes/qr-gm.svg"
+      counter={{ value: "-10%", label: "REMISE" }}
+      objective={{ label: "Avantage", value: "Sur toutes les prestations" }}
+      qr="/passes/qr-greenmirror.svg"
     />
   )
 }
