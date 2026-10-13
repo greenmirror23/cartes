@@ -66,11 +66,11 @@ export default function Footer() {
               Contact
             </div>
             <a
-              href="mailto:contact@greenmirror.fr"
+              href="mailto:greenmirror23@gmail.com"
               className="text-[#c8ef4a] text-sm hover:text-[#dcf58a] transition-colors duration-200"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              contact@greenmirror.fr
+              greenmirror23@gmail.com
             </a>
             <p
               className="text-[#a1a1a6] text-xs mt-4 leading-relaxed"
@@ -92,7 +92,7 @@ export default function Footer() {
             className="text-[#777777] text-xs"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            © 2025 GreenMirror. Tous droits réservés.
+            © 2026 GreenMirror. Tous droits réservés.
           </p>
           <p
             className="text-[#777777] text-xs"
