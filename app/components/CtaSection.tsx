@@ -53,7 +53,7 @@ export default function CtaSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          href="mailto:contact@greenmirror.fr"
+          href="mailto:greenmirror23@gmail.com"
           className="inline-flex items-center gap-4 px-8 py-5 rounded-full text-[15px] font-bold transition-all duration-300 hover:-translate-y-0.5"
           style={{
             background: "#c8ef4a",
