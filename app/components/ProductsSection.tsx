@@ -1,6 +1,23 @@
 "use client"
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+
+const CONTACT = "greenmirror23@gmail.com"
+const OPTION_PRICE = 29
+type Mode = "once" | "monthly"
+
+// Liens de paiement Stripe. Clé : "<pack>-<mode>-<option>" (option = notifications).
+// Si un lien manque, le bouton ouvre un mail pré-rempli à CONTACT.
+const STRIPE: Record<string, string> = {
+  "Small-once-no": "https://buy.stripe.com/4gM4gygYT37s7SOdem7g405",
+  "Small-once-opt": "https://buy.stripe.com/7sYaEWfUP8rM4GCeiq7g406",
+  "Small-monthly-opt": "https://buy.stripe.com/3cI9ASfUPfUegpk3DM7g407",
+  "Medium-once-no": "https://buy.stripe.com/aFa5kCfUP6jE1uq0rA7g408",
+  "Medium-once-opt": "https://buy.stripe.com/eVq8wO4c7gYib507U27g409",
+  "Medium-monthly-opt": "https://buy.stripe.com/cNiaEW5gb6jE2yu1vE7g40a",
+  "Large-once-opt": "https://buy.stripe.com/00wcN49wr7nI8WScai7g40b",
+  "Large-monthly-opt": "https://buy.stripe.com/14A00i8sn0Zkc942zI7g403",
+}
 
 const PACKS = [
   {
@@ -17,7 +34,7 @@ const PACKS = [
       "QR code intégré et scannable",
       "Design aux couleurs de votre marque",
       "Notifications automatiques et géolocalisées",
-      "Espace commerçant : cartes délivrées, restantes et fichier clients",
+      "Application commerçant : scan des cartes, suivi des passages, fichier clients",
       "Support par email",
       "Livraison sous 48h",
     ],
@@ -39,7 +56,7 @@ const PACKS = [
       "QR code intégré et scannable",
       "Design aux couleurs de votre marque",
       "Notifications automatiques et géolocalisées",
-      "Espace commerçant : cartes délivrées, restantes et fichier clients",
+      "Application commerçant : scan des cartes, suivi des passages, fichier clients",
       "Support prioritaire (réponse < 4h)",
       "Livraison sous 48h",
       "Renouvellement facilité",
@@ -62,8 +79,8 @@ const PACKS = [
       "QR code intégré et scannable",
       "Design premium sur mesure",
       "Notifications automatiques et géolocalisées",
-      "Notifications personnalisées incluses (4 campagnes par mois)",
-      "Espace commerçant : cartes délivrées, restantes et fichier clients",
+      "Notifications personnalisées illimitées incluses",
+      "Application commerçant : scan des cartes, suivi des passages, fichier clients",
       "Support dédié (réponse < 2h)",
       "Livraison sous 48h",
       "Renouvellement prioritaire",
@@ -77,6 +94,7 @@ const PACKS = [
 export default function ProductsSection() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: "-100px" })
+  const [mode, setMode] = useState<Mode>("once")
 
   return (
     <section
@@ -110,9 +128,41 @@ export default function ProductsSection() {
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Des cartes de fidélité numériques premium, personnalisées à votre
-            image. Facturation mensuelle.
+            image. Payez en une fois pour l&apos;année, ou en 12 mensualités.
           </p>
         </motion.div>
+
+        {/* Mode de paiement */}
+        <div className="flex justify-center mb-10">
+          <div
+            role="group"
+            aria-label="Mode de paiement"
+            className="inline-flex rounded-2xl p-1"
+            style={{ border: "1px solid #dddddd", background: "#ffffff" }}
+          >
+            {(
+              [
+                ["once", "Paiement en une fois"],
+                ["monthly", "Paiement en plusieurs fois"],
+              ] as [Mode, string][]
+            ).map(([m, label]) => (
+              <button
+                key={m}
+                type="button"
+                aria-pressed={mode === m}
+                onClick={() => setMode(m)}
+                className="px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  background: mode === m ? "#111111" : "transparent",
+                  color: mode === m ? "#f5f5f7" : "#111111",
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Cards grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -123,7 +173,7 @@ export default function ProductsSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.15 + i * 0.15 }}
             >
-              <PackCard pack={pack} />
+              <PackCard pack={pack} mode={mode} />
             </motion.div>
           ))}
         </div>
@@ -156,15 +206,19 @@ export default function ProductsSection() {
               Un événement, une offre du jour, un créneau libre : vous écrivez
               le message, vous choisissez le jour et l&apos;heure, il apparaît
               sur l&apos;écran verrouillé de vos clients. Tout se gère depuis
-              votre espace commerçant, sans nous appeler.
+              votre application commerçant, sans nous appeler.
             </p>
             <ul
               className="grid gap-2 text-sm text-[#111111]/75"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              <li>2 campagnes par mois sur Small et Medium, 4 sur Large</li>
-              <li>Prénom du client intégré au message</li>
-              <li>Incluse dans le pack Large, ajoutable aux autres à tout moment</li>
+              <li>Aucun quota de campagnes (dans la limite des règles Apple et Google Wallet)</li>
+              <li>
+                À tous vos clients, ou seulement à ceux que vous sélectionnez
+              </li>
+              <li>
+                Incluse dans le pack Large, ajoutable aux autres à tout moment
+              </li>
             </ul>
           </div>
           <div className="md:text-right">
@@ -183,22 +237,13 @@ export default function ProductsSection() {
               </span>
             </div>
             <p
-              className="text-xs text-[#777777] mt-2 mb-5"
+              className="text-xs text-[#777777] mt-2"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              Small 79€ · Medium 124€ · Large 160€
+              S&apos;ajoute au prix du pack
+              <br />
+              Cochez-la sous le pack de votre choix
             </p>
-            <a
-              href="mailto:contact@greenmirror.fr?subject=Option%20notifications%20personnalis%C3%A9es"
-              className="inline-block text-center px-6 py-3 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300"
-              style={{
-                border: "1px solid #111111",
-                color: "#111111",
-                fontFamily: "var(--font-inter)",
-              }}
-            >
-              Ajouter l&apos;option →
-            </a>
           </div>
         </motion.div>
 
@@ -222,7 +267,23 @@ export default function ProductsSection() {
   )
 }
 
-function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
+function PackCard({ pack, mode }: { pack: (typeof PACKS)[0]; mode: Mode }) {
+  const included = pack.withOption === null
+  const [opt, setOpt] = useState(false)
+  const withOpt = included || opt
+  const monthly = Number(pack.price) + (opt && !included ? OPTION_PRICE : 0)
+  const total = monthly * 12
+  // Les liens Stripe existants sont des abonnements mensuels du pack seul.
+  // Les autres combinaisons utilisent STRIPE ci-dessus, sinon un mail.
+  const key = `${pack.name}-${mode}-${withOpt ? "opt" : "no"}`
+  const stripeHref =
+    mode === "monthly" && !withOpt ? pack.href : STRIPE[key] || ""
+  const subject = encodeURIComponent(
+    `Commande Pack ${pack.name} - ${
+      mode === "once" ? `paiement en une fois (${total} €)` : `12 mensualités de ${monthly} €`
+    }${withOpt ? " - avec notifications personnalisées" : ""}`
+  )
+  const href = stripeHref || `mailto:${CONTACT}?subject=${subject}`
   // Le pack mis en avant est la carte sombre (#121212) de la section claire.
   const dark = pack.highlight
   const ink = dark ? "#f5f5f7" : "#111111"
@@ -308,7 +369,7 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
             className="text-3xl font-semibold"
             style={{ fontFamily: "var(--font-playfair)", color: ink }}
           >
-            {pack.price}€
+            {mode === "once" ? total : monthly}€
           </span>
           <span
             className="text-xs ml-1"
@@ -317,7 +378,7 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
               color: dark ? "#a1a1a6" : "#777777",
             }}
           >
-            par mois
+            {mode === "once" ? "en une fois, pour 12 mois" : "par mois, pendant 12 mois"}
           </span>
         </div>
         <p
@@ -327,9 +388,10 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
             color: dark ? "#a1a1a6" : "#777777",
           }}
         >
-          {pack.withOption
-            ? `${pack.withOption} € par mois avec les notifications personnalisées`
-            : "Notifications personnalisées incluses"}
+          {mode === "once"
+            ? `Soit ${monthly} € par mois sur 12 mois`
+            : `Soit ${total} € sur 12 mois`}
+          {withOpt ? ", notifications personnalisées comprises" : ""}
         </p>
       </div>
 
@@ -361,9 +423,36 @@ function PackCard({ pack }: { pack: (typeof PACKS)[0] }) {
         ))}
       </ul>
 
+      {/* Option notifications personnalisées */}
+      <label
+        className="flex items-start gap-3 mb-6 rounded-2xl p-4 text-sm leading-snug"
+        style={{
+          fontFamily: "var(--font-inter)",
+          border: `1px solid ${rule}`,
+          color: body,
+          cursor: included ? "default" : "pointer",
+        }}
+      >
+        <input
+          type="checkbox"
+          checked={withOpt}
+          disabled={included}
+          onChange={(e) => setOpt(e.target.checked)}
+          className="mt-0.5 h-4 w-4 flex-shrink-0"
+          style={{ accentColor: dark ? "#c8ef4a" : "#5e7720" }}
+        />
+        <span>
+          <b style={{ color: ink }}>Notifications personnalisées illimitées</b>
+          <br />
+          {included
+            ? "Incluses dans le pack Large, sans supplément"
+            : `+${OPTION_PRICE} € par mois, ajoutés au prix du pack`}
+        </span>
+      </label>
+
       {/* CTA */}
       <a
-        href={pack.href}
+        href={href}
         className="block w-full text-center py-4 rounded-2xl text-sm font-bold tracking-wide transition-all duration-300"
         style={
           dark
