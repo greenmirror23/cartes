@@ -32,6 +32,7 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8">
           {[
             { label: "Comment ça marche", href: "#wallet" },
+            { label: "L’application", href: "#application" },
             { label: "Nos packs", href: "#products" },
             { label: "Contact", href: "#contact" },
           ].map((item) => (

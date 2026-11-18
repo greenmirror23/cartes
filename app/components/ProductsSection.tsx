@@ -79,7 +79,7 @@ const PACKS = [
       "QR code intégré et scannable",
       "Design premium sur mesure",
       "Notifications automatiques et géolocalisées",
-      "Notifications personnalisées illimitées incluses",
+      "Notifications personnalisées incluses (jusqu’à 3 par jour et par client)",
       "Application commerçant : scan des cartes, suivi des passages, fichier clients",
       "Support dédié (réponse < 2h)",
       "Livraison sous 48h",
@@ -212,7 +212,7 @@ export default function ProductsSection() {
               className="grid gap-2 text-sm text-[#111111]/75"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              <li>Aucun quota de campagnes (dans la limite des règles Apple et Google Wallet)</li>
+              <li>Aucun quota de campagnes : jusqu’à 3 notifications par jour et par client</li>
               <li>
                 À tous vos clients, ou seulement à ceux que vous sélectionnez
               </li>
@@ -442,7 +442,7 @@ function PackCard({ pack, mode }: { pack: (typeof PACKS)[0]; mode: Mode }) {
           style={{ accentColor: dark ? "#c8ef4a" : "#5e7720" }}
         />
         <span>
-          <b style={{ color: ink }}>Notifications personnalisées illimitées</b>
+          <b style={{ color: ink }}>Notifications personnalisées</b>
           <br />
           {included
             ? "Incluses dans le pack Large, sans supplément"
